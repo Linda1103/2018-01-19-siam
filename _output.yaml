@@ -1,0 +1,15 @@
+revealjs::revealjs_presentation:
+  self_contained: false
+  lib_dir: www
+  slide_level: 2
+  theme: white
+  highlight: default
+  css: www/css/styles.css
+  fig_width: 7
+  fig_height: 5
+  fig_caption: true
+  transition: none
+  reveal_options:
+    slideNumber: true
+    previewLinks: false
+    controls: false
