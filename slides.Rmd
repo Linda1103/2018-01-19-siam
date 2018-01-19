@@ -7,6 +7,10 @@ date: January 19, 2018
 ---
 
 
+```{r setup, echo = FALSE}
+options(width = 90)
+```
+
 ## Getting Started
 
 - slides available at [wenjie-stat.me/2018-01-19-siam/][slides]
@@ -68,7 +72,7 @@ date: January 19, 2018
 - editors
   - RStudio IDE (probably the most popular choice)
   - [Emacs][emacs] + [ESS][ess] (Emacs Speaks Statistics)
-  - other alternatives: Notepad++/NppToR, Eclipse/StatET, Vim, ...
+  - other alternatives: Notepad++/NppToR, StatET (R + Eclipse), Vim, ...
 
 
 - A list of R packages needed is given below.
@@ -307,7 +311,7 @@ expand.grid()
 subset()
 do.call()
 by(), aggregate()
-reshape()
+reshape(), merge()
 ```
 
 ## Functions
@@ -571,14 +575,57 @@ readLines(), cat()
 
 - useful packages: **foreign**, **openxlsx**, **readr**, **haven**,
   **XLConnect**, **readxl**, ...
-
 - able to work with databases: **RODBC**, **RMySQL**, ...
-
 - JSON files? **jsonlite**, **rjson**, ...
-
 - YAML files? **yaml**, ...
-
+- BibTeX files? **bibtex**, ...
 - ...
+
+
+## Working with data.frame
+
+- Base R has a variety of useful functions for working with data.
+
+- two great add-on packages for working with `data.frame`: **data.table** and
+  **dplyr**
+
+
+## Example: Sum aggregation by group
+
+- Consider a stackoverflow question: [How to sum a variable by
+  group?][stackoverflow-sum-by-group]
+- Suppose we have integer vector `x` representing the group.
+- We want to sum/aggregate `y` by group `x`.
+
+```{r sum-aggregation-data}
+set.seed(123)
+dat <- data.frame(x = rpois(200, lambda = 5),
+                  y = round(runif(200, max = 10)))
+str(dat)
+```
+---
+
+- The following solutions give equivalent results in slightly different formats.
+
+```{r sum-aggregation-solutions}
+res_1 <- with(dat, by(y, x, sum))                   # `base::by`
+
+res_2 <- with(dat, tapply(y, x, sum))               # `base::tapply`
+
+res_3 <- aggregate(y ~ x, data = dat, FUN = sum)    # `stats::aggregate`
+
+res_4 <- xtabs(y ~ x, data = dat)                   # `stats::xtabs`
+
+suppressMessages(library(plyr))                     # `plyr::ddply`
+res_5 <- ddply(dat, "x", summarise, sum = sum(y))
+
+suppressMessages(library(dplyr))                    # dplyr package
+res_6 <- dat %>% group_by(x) %>% summarise(sum = sum(y))
+
+suppressMessages(library(data.table))               # data.table package
+dat <- as.data.table(dat)
+res_7 <- dat[, .(sum = sum(y)), keyby = x]
+```
 
 
 ## Add-on packages
@@ -665,11 +712,208 @@ str(bar("123"))
 str(bar("abc"))
 ```
 
+## Performance
 
-## Some Reference
+- Consider the following example of computing the row sum for a given matrix
+  `mat`.
 
-- placeholder
+```{r rowsum-examples}
+mat <- matrix(rnorm(200), nrow = 10)
+a <- vector(mode = "numeric", length = nrow(mat))
+for (i in 1:nrow(mat)) a[i] <- sum(mat[i, ]) # 1. using a for loop
+a
+apply(mat, 1, sum)                      # 2. using the apply function
+rowSums(mat)                            # 3. using the rowSums function
+```
 
+---
+
+## Benchmarking
+
+- related packages: **microbenchmark**, **rbenchmark**, **benchmark**, ...
+
+```{r rowsum-benchmark, cache = TRUE}
+library(microbenchmark)
+microbenchmark(
+    "for loop" = { a <- vector(mode = "numeric", length = nrow(mat));
+        for (i in 1:nrow(mat)) a[i] <- sum(mat[i, ]) },
+    "apply" = apply(mat, 1, sum),
+    "rowSums" = rowSums(mat),
+    times = 200, unit = "relative"
+)
+```
+
+- R is not a fast language compared with C/C++/Fortran.  However, a lot of R
+ code is slow simply because it is poorly written.
+
+
+## A few quick benchmarkings
+
+The R session information for benchmarking is given below.
+
+```{r sessionInfo}
+sessionInfo()
+```
+
+---
+
+- `1:length(vec)` vs. `seq_along(vec)`
+
+```{r performance-tip-1, cache = TRUE}
+vec <- rnorm(50)
+stopifnot(all.equal(1:length(vec), seq_along(vec)))
+microbenchmark(1:length(vec), seq_along(vec), times = 1e3, unit = "relative")
+```
+
+- `1:n` vs. `seq_len(n)`
+
+```{r performance-tip-2, cache = TRUE}
+stopifnot(all.equal(1:100, seq_len(100)))
+microbenchmark(1:100, seq_len(100), times = 1e3, unit = "relative")
+```
+
+---
+
+- `t(mat1) %*% mat1` vs. `crossprod(mat1)`
+
+
+```{r performance-tip-3, cache = TRUE}
+mat1 <- matrix(rnorm(1e4), 1e2)
+stopifnot(all.equal(mat1 %*% t(mat1), tcrossprod(mat1)))
+microbenchmark(t(mat1) %*% mat1, crossprod(mat1), unit = "relative")
+```
+
+- `mat1 %*% t(mat1)` vs. `tcrossprod(mat1)`
+
+```{r performance-tip-4, cache = TRUE}
+stopifnot(all.equal(mat1 %*% t(mat1), tcrossprod(mat1)))
+microbenchmark(mat1 %*% t(mat1), tcrossprod(mat1), unit = "relative")
+```
+
+---
+
+- `t(mat1) %*% mat2` vs. `crossprod(mat1, mat2)`
+
+```{r performance-tip-5, cache = TRUE}
+mat2 <- matrix(rnorm(1e4), 1e2)
+stopifnot(all.equal(t(mat1) %*% mat2, crossprod(mat1, mat2)))
+microbenchmark(t(mat1) %*% mat2, crossprod(mat1, mat2), unit = "relative")
+```
+
+- `mat1 %*% t(mat2)` vs. `tcrossprod(mat1, mat2)`
+
+```{r performance-tip-6, cache = TRUE}
+stopifnot(all.equal(mat1 %*% t(mat2), tcrossprod(mat1, mat2)))
+microbenchmark(mat1 %*% t(mat2), tcrossprod(mat1, mat2), unit = "relative")
+```
+
+---
+
+- `any(is.na(x))` vs. `anyNA(x)`
+
+```{r performance-tip-7, cache = TRUE}
+x <- 1:1e4; x[5e3] <- NaN               # coerces x to be double
+stopifnot(all.equal(any(is.na(x)), anyNA(x)))
+microbenchmark(any(is.na(x)), anyNA(x), unit = "relative")
+```
+
+- `apply` vs. `rowSums` (`rowMeans`, `colSums`, `colMeans`)
+
+```{r performance-tip-8, cache = TRUE}
+stopifnot(all.equal(apply(mat1, 2, mean), colMeans(mat1)))
+microbenchmark(apply(mat1, 2, mean), colMeans(mat1), unit = "relative")
+```
+
+## Revisit the example of sum aggregation by group
+
+```{r sum-aggregation-benchmark, cache = TRUE}
+microbenchmark(
+    "by" = with(dat, by(y, x, sum)),
+    "tapply" = with(dat, tapply(y, x, sum)),
+    "aggregate" = aggregate(y ~ x, data = dat, FUN = sum),
+    "xtabs" = xtabs(y ~ x, data = dat),
+    "ddply" = ddply(dat, "x", summarise, sum = sum(y)),
+    "dplyr" = dat %>% group_by(x) %>% summarise(sum = sum(y)),
+    "data.table" = dat[, .(sum = sum(y)), keyby = x],
+    times = 1e3, unit = "relative"
+)
+```
+
+
+## Profiling
+
+- How to find the bottleneck of the code (the slowest part of your code)?
+- related packages: **utils**, **profvis**, **profmem**, ...
+
+```{r profvis-example}
+## example of `profvis`
+if (interactive()) {
+    profvis({
+        dat <- data.frame(x = rnorm(5e4),
+                          y = rnorm(5e4))
+        plot(x ~ y, data = dat)
+        m <- lm(x ~ y, data = dat)
+        abline(m, col = "red")
+    })
+}
+```
+
+## Integrating R and other languages
+
+- C/Fortran: `.Call()`, `.C`, `.Fortran`, `dyn.load()`, ...
+
+- C++: **inline**, **Rcpp**, **RcppArmadillo**, ...
+
+- Julia: **XRJulia**, **JuliaCall**, ...
+
+- Python: **XRPython**, **reticulate**, ...
+
+- MATLAB: **R.matlab**, ...
+
+- ...
+
+
+## Sum aggregation by groups using **Rcpp**?
+
+- Try a straightforward (but possibly naive) implementation in **Rcpp**.
+
+```{r sum-aggregation-rcpp}
+library(Rcpp)
+sourceCpp("src/aggregateSum.cpp")     # available at the source repository
+res_8 <- with(dat, aggregateSum(y, x))
+microbenchmark(
+    "tapply" = with(dat, tapply(y, x, sum)),
+    "rcpp_wi_names" = with(dat, aggregateSum(y, x)),
+    "rcpp_wo_names" = with(dat, aggregateSum(y, x, addNames = FALSE)),
+    times = 1e3, unit = "relative"
+)
+```
+
+
+## Parallel computing
+
+- One R session/process normally uses only one core.
+- If the computing tasks are independent and can be run individually, we may
+  want to run them using different cores at the same time.
+  - e.g., fitting models over 1,000 simulated datasets
+- Some packages: **parallel**, **snow**, **snowfall**, **foreach**, ...
+- See more at [CRAN task view][cran-task-view-hpc] on high-performance and
+  parallel computing.
+- Run R script with input arguments in terminal with GNU parallel?  Or just use
+  the HPC cluster if available?
+
+
+## Graphics in R
+
+## R Markdown
+
+## Shiny applications
+
+## Some reference and further reading
+
+- Wickham, H. (2014). [*Advanced R*][adv-r-book]. CRC Press.
+
+- UseR! series, Springer.
 
 
 ## Thanks and happy coding!
@@ -685,3 +929,7 @@ str(bar("abc"))
 [emacs]: https://www.gnu.org/software/emacs/
 [ess]: https://ess.r-project.org/
 [peng2002debug]: http://www.biostat.jhsph.edu/~rpeng/docs/R-debug-tools.pdf
+[cran-task-view-hpc]: https://cran.r-project.org/view=HighPerformanceComputing
+[adv-r-book]: http://adv-r.had.co.nz
+[stackoverflow-sum-by-group]:
+    https://stackoverflow.com/questions/1660124/how-to-sum-a-variable-by-group

@@ -63,6 +63,10 @@ h2.author {
     margin-bottom: 15px;
 }
 
+.reveal pre code {
+    max-height: 450px;
+}
+
 div.sourceCode {
     margin-top: 10px;
     margin-bottom: 0px;
