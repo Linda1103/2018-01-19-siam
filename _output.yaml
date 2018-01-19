@@ -1,13 +1,12 @@
 revealjs::revealjs_presentation:
   self_contained: false
-  lib_dir: www
   slide_level: 2
   theme: white
   highlight: default
   css: www/css/styles.css
   includes:
     after_body: www/html/suffix.html
-  fig_width: 7
+  fig_width: 9
   fig_height: 5
   fig_caption: true
   transition: none

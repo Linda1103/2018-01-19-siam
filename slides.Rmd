@@ -30,11 +30,11 @@ options(width = 90)
 
 - performance and profiling
 
-- graphics
+- graphics in R
 
-- dynamic reporting with R
+- dynamic reporting with R Markdown
 
-- Shiny applications
+- R Shiny applications
 
 
 ## What is R?
@@ -81,8 +81,10 @@ options(width = 90)
 ## for reproducing the slides
 install.packages("revealjs")
 ## for following examples
-install.packages(c("bookdown", "data.table", "dplyr", "ggplot2",
-                   "microbenchmark", "plotly", "profvis", "RCpp", "shiny"))
+install.packages(
+    c("bookdown", "data.table", "dplyr", "fortunes", "ggplot2",
+      "microbenchmark", "plotly", "profvis", "RCpp", "shiny")
+)
 ```
 
 ## Getting help
@@ -327,10 +329,8 @@ function_name <- function(arguments) {
 }
 ```
 
-e.g.,
-
-
-```{r function-examples}
+```{r function-examples, echo = -9}
+## e.g.,
 foo <- function(x) x + 1
 bar <- function(x, y = "alpha") {
     x <- x + 1
@@ -338,6 +338,7 @@ bar <- function(x, y = "alpha") {
 }
 `%+%` <- function(e1, e2) paste0(e1, e2)
 "foo" %+% "bar"
+rm("%+%")               # remove it for using ggplot2 later
 ```
 
 ## Lazy evaluation
@@ -730,9 +731,9 @@ rowSums(mat)                            # 3. using the rowSums function
 
 ## Benchmarking
 
-- related packages: **microbenchmark**, **rbenchmark**, **benchmark**, ...
+- **microbenchmark**, **rbenchmark**, **benchmark**, ...
 
-```{r rowsum-benchmark, cache = TRUE}
+```{r rowsum-benchmark, cache = FALSE}
 library(microbenchmark)
 microbenchmark(
     "for loop" = { a <- vector(mode = "numeric", length = nrow(mat));
@@ -877,7 +878,7 @@ if (interactive()) {
 
 - Try a straightforward (but possibly naive) implementation in **Rcpp**.
 
-```{r sum-aggregation-rcpp}
+```{r sum-aggregation-rcpp, cache = TRUE}
 library(Rcpp)
 sourceCpp("src/aggregateSum.cpp")     # available at the source repository
 res_8 <- with(dat, aggregateSum(y, x))
@@ -897,7 +898,7 @@ microbenchmark(
   want to run them using different cores at the same time.
   - e.g., fitting models over 1,000 simulated datasets
 - Some packages: **parallel**, **snow**, **snowfall**, **foreach**, ...
-- See more at [CRAN task view][cran-task-view-hpc] on high-performance and
+- See more at the [CRAN task view][cran-task-view-hpc] on high-performance and
   parallel computing.
 - Run R script with input arguments in terminal with GNU parallel?  Or just use
   the HPC cluster if available?
@@ -905,15 +906,160 @@ microbenchmark(
 
 ## Graphics in R
 
+- two basic graphics systems in R
+  - base graphics (the **graphics** package)
+  - grid graphics (the **grid** package)
+- **lattice**: Trellis Graphics for R
+  - sub-plots conditional on categorical variables
+  - one of the recommended packages shipped with R
+- **ggplot2**: An R implementation of Leland Wilkinson's *Grammar of Graphics*
+  - nice abstraction of graphics layers
+  - http://ggplot2.tidyverse.org
+- interactive plots? **plotly**, **highcharter**, **Dygraphs**, ...
+- See more at the [CRAN task view][cran-task-view-graphics] on graphics.
+
+---
+
+```{r base-graphics-examples}
+## a simple example of using base plotting system
+par(mfrow = c(1, 2), mgp = c(2, 1, 0), mar = c(3, 3, 2, 0.1))
+x <- 1:22; plot(x, pch = x, col = x, cex = 2)
+abline(a = 0, b = 1, lty = 3, col = "#64C7C9")
+abline(h = 21, col = "#BDC0C3", lty = 2)
+hist(rnorm(200), breaks = 30, col = "#85B3CC", freq = FALSE)
+```
+
+---
+
+```{r ggplot2-example-1}
+## example boxplots of using ggplot2
+library(ggplot2)
+p <- ggplot(mpg, aes(class, hwy))
+(p1 <- p + geom_boxplot(aes(colour = drv)))
+```
+
+---
+
+```{r ggplot2-example-2}
+## flip the coordinate and use the classic dark-on-light theme
+p1 + coord_flip() + theme_bw()
+```
+
+
 ## R Markdown
 
-## Shiny applications
+- code + narratives = report
+- some existing tools:
+  - WEB (Donald Knuth, Literate Programming)
+  - Noweb (Norman Ramsey)
+  - Sweave (Friedrich Leisch and R-core)
+  - **knitr** (Yihui Xie)
+  - Org mode (Carsten Dominik, Emacs)
+  - Jupyter notebook
+- **knitr**:
+  - `.Rnw` (R + LaTeX)
+  - `.Rmd` (R + Markdown)
+  - any computing language + any authoring language
 
-## Some reference and further reading
+---
 
-- Wickham, H. (2014). [*Advanced R*][adv-r-book]. CRC Press.
 
-- UseR! series, Springer.
+- R Markdown (**rmarkdown**): http://rmarkdown.rstudio.com
+  - [gallery][rmarkdown-gallery]
+  - [cheatsheet][rmarkdown-cheatsheet]
+- **bookdown**: https://bookdown.org
+- examples:
+  - these slides
+  - a [project template][dslab-templates] written in R Markdown and bookdown for
+    [Data Science Lab at UConn](http://statds.org)
+  - learn from the other cool kids! http://yihui.name/knitr/demo/showcase/
+
+---
+
+## Trend of vertical difference?
+
+```{r vertical-diff, echo = -1}
+par(mfrow = c(1, 1), mgp = c(2, 1, 0), mar = c(3, 3, 0.1, 0.1))
+x <- seq(0.1, 10, 0.1)
+plot(x, 1/x, type = "l", lwd = 2)
+lines(x, 1/x + 2, col = "red", lwd = 2)
+```
+
+## "Use the source, Luke!"
+
+- [Good Practices in R Programming][slides-maechler-2014] by Martin Mächler
+
+```{r good-practices}
+library(fortunes)
+fortune(250)
+```
+
+- from the ESS manual:
+
+> The source code is real. The objects are realizations of the source code.
+
+
+## R Shiny applications
+
+- **Shiny**: an R package that makes it easy to build interactive web apps
+    straight from R
+  - online tutorial available at http://shiny.rstudio.com
+  - a collection of [nice examples](https://github.com/rstudio/shiny-examples/)
+  - [gallery][shiny-gallery]
+  - [cheatsheet][shiny-cheatsheet]
+
+> - I saw this cool plate at (UConn) Y lot in last Summer!
+    <br/><img src="www/imgs/IMG_20170812_142318.jpg" width=350 />
+
+
+---
+
+## The "Hello Shiny!" example
+
+```r
+library("shiny")
+ui <- fluidPage(
+    titlePanel("Hello Shiny!"),
+    sidebarLayout(
+        sidebarPanel(sliderInput("bins", "Number of bins:",
+                                 min = 1, max = 50, value = 30)),
+        mainPanel(plotOutput("distPlot"))
+    )
+)
+server <- function(input, output) {
+    output$distPlot = renderPlot({
+        x = faithful[, 2]
+        bins = seq(min(x), max(x), length.out = input$bins + 1)
+        hist(x, breaks = bins, col = 'darkgray', border = 'white')
+    })
+}
+shinyApp(ui = ui, server = server)
+```
+
+
+## A simple miniUI example
+
+```{r shiny-splines2, echo = FALSE}
+knitr::include_app("https://wenjie-stat.shinyapps.io/minisplines2/", "500px")
+```
+
+- source available at [here][source-mini-splines2]
+
+
+## Some reference for further reading
+
+- [*R Programming for Data
+  Science*](https://bookdown.org/rdpeng/rprogdatascience/) by Roger D. Peng
+- [*R for Data Science*](http://r4ds.had.co.nz/) by Garrett Grolemund, and
+  Hadley Wickham
+- [*Advanced R*](http://adv-r.had.co.nz) by Hadley Wickham
+- [*Dynamic documents with R and knitr*](https://github.com/yihui/knitr-book) by
+  Yihui Xie
+- [*Software for Data Analysis: Programming with
+  R*](http://www.springer.com/us/book/9780387759357) by John Chambers
+- [Use R!](http://www.springer.com/series/6991) series at Springer
+- [*R in a Nutshell*][r-in-a-nutshell] by Joseph Adler
+- [Rstudio Cheatsheets][rstudio-cheatsheets]
 
 
 ## Thanks and happy coding!
@@ -930,6 +1076,18 @@ microbenchmark(
 [ess]: https://ess.r-project.org/
 [peng2002debug]: http://www.biostat.jhsph.edu/~rpeng/docs/R-debug-tools.pdf
 [cran-task-view-hpc]: https://cran.r-project.org/view=HighPerformanceComputing
-[adv-r-book]: http://adv-r.had.co.nz
 [stackoverflow-sum-by-group]:
     https://stackoverflow.com/questions/1660124/how-to-sum-a-variable-by-group
+[cran-task-view-graphics]: https://CRAN.R-project.org/view=Graphics
+[rmarkdown-cheatsheet]:
+    https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf
+[rmarkdown-gallery]: http://rmarkdown.rstudio.com/gallery.html
+[dslab-templates]: https://github.com/statds/dslab-templates
+[shiny-gallery]: http://shiny.rstudio.com/gallery/
+[shiny-cheatsheet]: http://shiny.rstudio.com/images/shiny-cheatsheet.pdf
+[source-mini-splines2]:
+    https://github.com/wenjie2wang/wenjie-stat.shinyapps/blob/master/miniSplines2/app.R
+[r-in-a-nutshell]: http://shop.oreilly.com/product/0636920022008.do
+[rstudio-cheatsheets]: https://www.rstudio.com/resources/cheatsheets/
+[slides-maechler-2014]:
+    https://stat.ethz.ch/Teaching/maechler/R/useR_2014/Maechler-2014-pr.pdf
