@@ -639,7 +639,7 @@ res_7 <- dat[, .(sum = sum(y)), keyby = x]
   - package authors and maintainers
   - public repository for version control and bug reports
   - automated tests
-  - package vignettes, documentation, news/changeLog
+  - package vignettes, documentation, NEWS/changeLog
   - reverse depends/imports/suggests
   - release history
 
@@ -970,8 +970,8 @@ p1 + coord_flip() + theme_bw()
 - **bookdown**: https://bookdown.org
 - examples:
   - these slides
-  - a [project template][dslab-templates] written in R Markdown and bookdown for
-    [Data Science Lab at UConn](http://statds.org)
+  - a [project template][dslab-templates] written in R Markdown and **bookdown**
+    for [Data Science Lab at UConn](http://statds.org)
   - learn from the other cool kids! http://yihui.name/knitr/demo/showcase/
 
 ---
