@@ -126,7 +126,7 @@ z <- y <- 4:1 - 1                     # z = y = (3, 2, 1, 0)
 log(y)                                # (1.099, 0.693, 0.000, -∞)
 y[1]                                  # 3
 y[c(1, 2)]                            # (3, 2)
-y[- 1]                                 # (2, 1, 0)
+y[- 1]                                # (2, 1, 0)
 y[- c(2, 3)]                          # (3, 0)
 c(x, y)                               # (2.25, 3, 2, 1, 0)
 c(exp(1), pi)                         # (2.718282, 3.141593)
@@ -223,7 +223,7 @@ mean(), median(), cor(), sd(), var(), range()
 ```r
 ## Ordering and tabulating
 duplicated(), unique()
-,sort(), order(), rank(), quantile()
+sort(), order(), rank(), quantile()
 rle(), table(), xtabs(), split(), cut()
 ```
 
@@ -233,7 +233,7 @@ rle(), table(), xtabs(), split(), cut()
     hyper, lnorm, logis, multinom, nbinom, norm, pois, signrank, t,
     unif, weibull, wilcox, birthday, tukey)
 ```
-e.g., `rnrom()` for generating random numbers following normal distribution.
+e.g., `rnorm()` for generating random numbers following normal distribution.
 
 
 ## Matrices and arrays
@@ -354,9 +354,9 @@ f(2)                    # without any error/warning/message
 
 ```{r eval = FALSE}
 f <- function(a, b) {
-    a + b
+    return(a + b)
 }
-f(2)                    # error: argument "b" is missing, with no default
+f(2)                     # error: argument "b" is missing, with no default
 ```
 
 ## The `...` (ellipsis) argument
@@ -593,7 +593,7 @@ readLines(), cat()
 
 ## Example: Sum aggregation by group
 
-- Consider a stackoverflow question: [How to sum a variable by
+- Consider a StackOverflow question: [How to sum a variable by
   group?][stackoverflow-sum-by-group]
 - Suppose we have integer vector `x` representing the group.
 - We want to sum/aggregate `y` by group `x`.
