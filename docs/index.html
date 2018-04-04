@@ -1269,10 +1269,10 @@ Department of Statistics, UConn</div></h2>
 <a class="sourceLine" id="cb124-7" data-line-number="7">    <span class="dt">times =</span> <span class="dv">200</span>, <span class="dt">unit =</span> <span class="st">&quot;relative&quot;</span></a>
 <a class="sourceLine" id="cb124-8" data-line-number="8">)</a></code></pre></div>
 <pre><code>## Unit: relative
-##      expr        min       lq       mean     median        uq       max neval cld
-##  for loop 516.833434 416.0940 304.104028 277.210316 251.80380 270.38806   200   b
-##     apply   6.344936   5.6579   5.305336   4.252972   4.35138  67.79042   200  a 
-##   rowSums   1.000000   1.0000   1.000000   1.000000   1.00000   1.00000   200  a</code></pre>
+##      expr        min         lq       mean    median         uq       max neval cld
+##  for loop 432.153518 404.372948 292.993888 276.20761 243.655704 133.94804   200   b
+##     apply   5.160736   5.492401   5.404283   4.35602   4.395935  36.75453   200  a 
+##   rowSums   1.000000   1.000000   1.000000   1.00000   1.000000   1.00000   200  a</code></pre>
 <ul>
 <li>R is not a fast language compared with C/C++/Fortran. However, a lot of R code is slow simply because it is poorly written.</li>
 </ul>
@@ -1325,10 +1325,11 @@ Department of Statistics, UConn</div></h2>
 </ul>
 <div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb128-1" data-line-number="1">vec &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">50</span>)</a>
 <a class="sourceLine" id="cb128-2" data-line-number="2"><span class="kw">stopifnot</span>(<span class="kw">all.equal</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(vec), <span class="kw">seq_along</span>(vec)))</a>
-<a class="sourceLine" id="cb128-3" data-line-number="3"><span class="kw">microbenchmark</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(vec), <span class="kw">seq_along</span>(vec), <span class="dt">times =</span> <span class="fl">1e3</span>, <span class="dt">unit =</span> <span class="st">&quot;relative&quot;</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb128-3" data-line-number="3"><span class="kw">microbenchmark</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(vec), <span class="kw">seq_along</span>(vec),</a>
+<a class="sourceLine" id="cb128-4" data-line-number="4">               <span class="dt">times =</span> <span class="fl">1e3</span>, <span class="dt">unit =</span> <span class="st">&quot;relative&quot;</span>)</a></code></pre></div>
 <pre><code>## Unit: relative
 ##            expr      min       lq     mean   median       uq      max neval cld
-##   1:length(vec) 1.694118 1.522523 1.501299 1.639583 1.418182 6.407876  1000   b
+##   1:length(vec) 1.567742 1.649103 1.534697 1.585778 1.539155 1.074651  1000   b
 ##  seq_along(vec) 1.000000 1.000000 1.000000 1.000000 1.000000 1.000000  1000  a</code></pre>
 <ul>
 <li><code>1:n</code> vs. <code>seq_len(n)</code></li>
@@ -1337,7 +1338,7 @@ Department of Statistics, UConn</div></h2>
 <a class="sourceLine" id="cb130-2" data-line-number="2"><span class="kw">microbenchmark</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, <span class="kw">seq_len</span>(<span class="dv">100</span>), <span class="dt">times =</span> <span class="fl">1e3</span>, <span class="dt">unit =</span> <span class="st">&quot;relative&quot;</span>)</a></code></pre></div>
 <pre><code>## Unit: relative
 ##          expr      min       lq     mean   median       uq       max neval cld
-##         1:100 1.312139 1.252525 1.192504 1.366359 1.180897 0.3167277  1000   b
+##         1:100 1.434783 1.353846 1.211488 1.272997 1.219895 0.8063325  1000   b
 ##  seq_len(100) 1.000000 1.000000 1.000000 1.000000 1.000000 1.0000000  1000  a</code></pre>
 </section>
 <section class="slide level2">
@@ -1350,7 +1351,7 @@ Department of Statistics, UConn</div></h2>
 <a class="sourceLine" id="cb132-3" data-line-number="3"><span class="kw">microbenchmark</span>(<span class="kw">t</span>(mat1) <span class="op">%*%</span><span class="st"> </span>mat1, <span class="kw">crossprod</span>(mat1), <span class="dt">unit =</span> <span class="st">&quot;relative&quot;</span>)</a></code></pre></div>
 <pre><code>## Unit: relative
 ##              expr      min       lq     mean   median       uq      max neval cld
-##  t(mat1) %*% mat1 1.671124 1.671019 1.702877 1.711926 1.708704 2.568827   100   b
+##  t(mat1) %*% mat1 2.068901 2.034417 2.121033 2.041875 2.194208 3.642643   100   b
 ##   crossprod(mat1) 1.000000 1.000000 1.000000 1.000000 1.000000 1.000000   100  a</code></pre>
 <ul>
 <li><code>mat1 %*% t(mat1)</code> vs. <code>tcrossprod(mat1)</code></li>
@@ -1358,9 +1359,9 @@ Department of Statistics, UConn</div></h2>
 <div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb134-1" data-line-number="1"><span class="kw">stopifnot</span>(<span class="kw">all.equal</span>(mat1 <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(mat1), <span class="kw">tcrossprod</span>(mat1)))</a>
 <a class="sourceLine" id="cb134-2" data-line-number="2"><span class="kw">microbenchmark</span>(mat1 <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(mat1), <span class="kw">tcrossprod</span>(mat1), <span class="dt">unit =</span> <span class="st">&quot;relative&quot;</span>)</a></code></pre></div>
 <pre><code>## Unit: relative
-##              expr      min      lq     mean   median       uq      max neval cld
-##  mat1 %*% t(mat1) 1.789637 1.77859 1.782556 1.782095 1.705406 2.270926   100   b
-##  tcrossprod(mat1) 1.000000 1.00000 1.000000 1.000000 1.000000 1.000000   100  a</code></pre>
+##              expr      min       lq     mean   median       uq      max neval cld
+##  mat1 %*% t(mat1) 1.896281 1.855674 1.891234 1.879163 1.870892 3.561835   100   b
+##  tcrossprod(mat1) 1.000000 1.000000 1.000000 1.000000 1.000000 1.000000   100  a</code></pre>
 </section>
 <section class="slide level2">
 
@@ -1371,18 +1372,18 @@ Department of Statistics, UConn</div></h2>
 <a class="sourceLine" id="cb136-2" data-line-number="2"><span class="kw">stopifnot</span>(<span class="kw">all.equal</span>(<span class="kw">t</span>(mat1) <span class="op">%*%</span><span class="st"> </span>mat2, <span class="kw">crossprod</span>(mat1, mat2)))</a>
 <a class="sourceLine" id="cb136-3" data-line-number="3"><span class="kw">microbenchmark</span>(<span class="kw">t</span>(mat1) <span class="op">%*%</span><span class="st"> </span>mat2, <span class="kw">crossprod</span>(mat1, mat2), <span class="dt">unit =</span> <span class="st">&quot;relative&quot;</span>)</a></code></pre></div>
 <pre><code>## Unit: relative
-##                   expr      min       lq     mean   median       uq      max neval cld
-##       t(mat1) %*% mat2 1.000000 1.000000 1.000000 1.000000 1.000000 1.000000   100  a 
-##  crossprod(mat1, mat2) 1.077568 1.078591 1.108695 1.091153 1.100382 2.664015   100   b</code></pre>
+##                   expr      min       lq     mean   median       uq       max neval cld
+##       t(mat1) %*% mat2 1.061678 1.085385 1.092117 1.087051 1.131448 0.5650585   100   b
+##  crossprod(mat1, mat2) 1.000000 1.000000 1.000000 1.000000 1.000000 1.0000000   100  a</code></pre>
 <ul>
 <li><code>mat1 %*% t(mat2)</code> vs. <code>tcrossprod(mat1, mat2)</code></li>
 </ul>
 <div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb138-1" data-line-number="1"><span class="kw">stopifnot</span>(<span class="kw">all.equal</span>(mat1 <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(mat2), <span class="kw">tcrossprod</span>(mat1, mat2)))</a>
 <a class="sourceLine" id="cb138-2" data-line-number="2"><span class="kw">microbenchmark</span>(mat1 <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(mat2), <span class="kw">tcrossprod</span>(mat1, mat2), <span class="dt">unit =</span> <span class="st">&quot;relative&quot;</span>)</a></code></pre></div>
 <pre><code>## Unit: relative
-##                    expr      min       lq     mean   median       uq      max neval cld
-##        mat1 %*% t(mat2) 1.027985 1.027803 1.043638 1.026904 1.027779 2.333158   100   b
-##  tcrossprod(mat1, mat2) 1.000000 1.000000 1.000000 1.000000 1.000000 1.000000   100  a</code></pre>
+##                    expr      min       lq    mean   median       uq      max neval cld
+##        mat1 %*% t(mat2) 1.034565 1.037275 1.05693 1.028481 1.047323 2.210879   100   b
+##  tcrossprod(mat1, mat2) 1.000000 1.000000 1.00000 1.000000 1.000000 1.000000   100  a</code></pre>
 </section>
 <section class="slide level2">
 
@@ -1393,18 +1394,18 @@ Department of Statistics, UConn</div></h2>
 <a class="sourceLine" id="cb140-2" data-line-number="2"><span class="kw">stopifnot</span>(<span class="kw">all.equal</span>(<span class="kw">any</span>(<span class="kw">is.na</span>(x)), <span class="kw">anyNA</span>(x)))</a>
 <a class="sourceLine" id="cb140-3" data-line-number="3"><span class="kw">microbenchmark</span>(<span class="kw">any</span>(<span class="kw">is.na</span>(x)), <span class="kw">anyNA</span>(x), <span class="dt">unit =</span> <span class="st">&quot;relative&quot;</span>)</a></code></pre></div>
 <pre><code>## Unit: relative
-##           expr     min       lq     mean   median       uq      max neval cld
-##  any(is.na(x)) 5.28152 5.328661 5.494256 5.356532 5.314934 16.16707   100   b
-##       anyNA(x) 1.00000 1.000000 1.000000 1.000000 1.000000  1.00000   100  a</code></pre>
+##           expr      min       lq   mean   median     uq      max neval cld
+##  any(is.na(x)) 5.337361 5.371203 5.6475 5.341983 5.3265 20.68088   100   b
+##       anyNA(x) 1.000000 1.000000 1.0000 1.000000 1.0000  1.00000   100  a</code></pre>
 <ul>
 <li><code>apply</code> vs. <code>rowSums</code> (<code>rowMeans</code>, <code>colSums</code>, <code>colMeans</code>)</li>
 </ul>
 <div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" data-line-number="1"><span class="kw">stopifnot</span>(<span class="kw">all.equal</span>(<span class="kw">apply</span>(mat1, <span class="dv">2</span>, mean), <span class="kw">colMeans</span>(mat1)))</a>
 <a class="sourceLine" id="cb142-2" data-line-number="2"><span class="kw">microbenchmark</span>(<span class="kw">apply</span>(mat1, <span class="dv">2</span>, mean), <span class="kw">colMeans</span>(mat1), <span class="dt">unit =</span> <span class="st">&quot;relative&quot;</span>)</a></code></pre></div>
 <pre><code>## Unit: relative
-##                  expr     min       lq     mean   median       uq      max neval cld
-##  apply(mat1, 2, mean) 44.4762 37.84451 39.85958 41.07886 37.85566 85.86805   100   b
-##        colMeans(mat1)  1.0000  1.00000  1.00000  1.00000  1.00000  1.00000   100  a</code></pre>
+##                  expr      min      lq     mean   median       uq      max neval cld
+##  apply(mat1, 2, mean) 42.90425 41.0403 31.74537 36.29913 25.37704 68.62862   100   b
+##        colMeans(mat1)  1.00000  1.0000  1.00000  1.00000  1.00000  1.00000   100  a</code></pre>
 </section>
 <section id="revisit-the-example-of-sum-aggregation-by-group" class="slide level2">
 <h2>Revisit the example of sum aggregation by group</h2>
@@ -1419,14 +1420,14 @@ Department of Statistics, UConn</div></h2>
 <a class="sourceLine" id="cb144-9" data-line-number="9">    <span class="dt">times =</span> <span class="fl">1e3</span>, <span class="dt">unit =</span> <span class="st">&quot;relative&quot;</span></a>
 <a class="sourceLine" id="cb144-10" data-line-number="10">)</a></code></pre></div>
 <pre><code>## Unit: relative
-##        expr       min        lq      mean    median        uq        max neval    cld
-##          by  3.881619  3.766356  3.564003  3.649324  3.433699  0.5389824  1000  bc   
-##      tapply  1.000000  1.000000  1.000000  1.000000  1.000000  1.0000000  1000 a     
-##   aggregate  7.226607  7.076847  6.680159  6.999255  6.504549  0.6176211  1000     e 
-##       xtabs  5.485991  5.324837  5.008341  5.337827  5.010001  0.4673422  1000   cd  
-##       ddply 23.053920 21.777381 20.862429 20.788647 19.288396 22.0855133  1000      f
-##       dplyr  5.217525  5.709053  5.728427  5.737250  5.350965  8.5139479  1000    de 
-##  data.table  3.095050  3.379867  3.147020  3.467756  3.185681  0.3728556  1000  b</code></pre>
+##        expr       min        lq      mean    median        uq       max neval   cld
+##          by  3.840108  3.781034  3.462978  3.586863  3.216732  1.478090  1000  b   
+##      tapply  1.000000  1.000000  1.000000  1.000000  1.000000  1.000000  1000 a    
+##   aggregate  7.237326  7.210388  6.763582  7.142968  6.420644  1.914705  1000    d 
+##       xtabs  5.406453  5.439945  5.182376  5.476047  4.987239  1.564497  1000   c  
+##       ddply 22.748202 22.080111 20.367626 20.675366 18.096151 58.834953  1000     e
+##       dplyr  5.224383  6.000011  5.971183  5.894329  5.285228 28.702014  1000   cd 
+##  data.table  3.148850  3.535590  3.332793  3.579980  3.160607  1.413875  1000  b</code></pre>
 </section>
 <section id="profiling" class="slide level2">
 <h2>Profiling</h2>
@@ -1472,8 +1473,8 @@ Department of Statistics, UConn</div></h2>
 <a class="sourceLine" id="cb147-9" data-line-number="9">)</a></code></pre></div>
 <pre><code>## Unit: relative
 ##           expr      min       lq     mean   median       uq      max neval cld
-##         tapply 8.876908 7.986234 7.700758 7.006913 7.181110 66.22191  1000   c
-##  rcpp_wi_names 3.380199 3.209480 3.166481 2.897543 2.937411 32.61176  1000  b 
+##         tapply 8.957147 8.799673 8.790180 8.521680 8.436642 51.66355  1000   c
+##  rcpp_wi_names 3.540774 3.444513 3.487307 3.346194 3.286836 30.28195  1000  b 
 ##  rcpp_wo_names 1.000000 1.000000 1.000000 1.000000 1.000000  1.00000  1000 a</code></pre>
 </section>
 <section id="parallel-computing" class="slide level2">
@@ -1519,7 +1520,7 @@ Department of Statistics, UConn</div></h2>
 <a class="sourceLine" id="cb149-4" data-line-number="4"><span class="kw">abline</span>(<span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, <span class="dt">lty =</span> <span class="dv">3</span>, <span class="dt">col =</span> <span class="st">&quot;#64C7C9&quot;</span>)</a>
 <a class="sourceLine" id="cb149-5" data-line-number="5"><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">21</span>, <span class="dt">col =</span> <span class="st">&quot;#BDC0C3&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb149-6" data-line-number="6"><span class="kw">hist</span>(<span class="kw">rnorm</span>(<span class="dv">200</span>), <span class="dt">breaks =</span> <span class="dv">30</span>, <span class="dt">col =</span> <span class="st">&quot;#85B3CC&quot;</span>, <span class="dt">freq =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<p><img data-src="/home/wenjie/Dropbox/git/workshop/2018-01-19-siam/docs/index_files/figure-revealjs/base-graphics-examples-1.png" /><!-- --></p>
+<p><img data-src="index_files/figure-revealjs/base-graphics-examples-1.png" /><!-- --></p>
 </section>
 <section class="slide level2">
 
@@ -1527,13 +1528,13 @@ Department of Statistics, UConn</div></h2>
 <a class="sourceLine" id="cb150-2" data-line-number="2"><span class="kw">library</span>(ggplot2)</a>
 <a class="sourceLine" id="cb150-3" data-line-number="3">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(class, hwy))</a>
 <a class="sourceLine" id="cb150-4" data-line-number="4">(p1 &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> drv)))</a></code></pre></div>
-<p><img data-src="/home/wenjie/Dropbox/git/workshop/2018-01-19-siam/docs/index_files/figure-revealjs/ggplot2-example-1-1.png" /><!-- --></p>
+<p><img data-src="index_files/figure-revealjs/ggplot2-example-1-1.png" /><!-- --></p>
 </section>
 <section class="slide level2">
 
 <div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb151-1" data-line-number="1">## flip the coordinate and use the classic dark-on-light theme</a>
 <a class="sourceLine" id="cb151-2" data-line-number="2">p1 <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</a></code></pre></div>
-<p><img data-src="/home/wenjie/Dropbox/git/workshop/2018-01-19-siam/docs/index_files/figure-revealjs/ggplot2-example-2-1.png" /><!-- --></p>
+<p><img data-src="index_files/figure-revealjs/ggplot2-example-2-1.png" /><!-- --></p>
 </section>
 <section id="r-markdown" class="slide level2">
 <h2>R Markdown</h2>
@@ -1578,7 +1579,7 @@ Department of Statistics, UConn</div></h2>
 <div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="fl">0.1</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</a>
 <a class="sourceLine" id="cb152-2" data-line-number="2"><span class="kw">plot</span>(x, <span class="dv">1</span><span class="op">/</span>x, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb152-3" data-line-number="3"><span class="kw">lines</span>(x, <span class="dv">1</span><span class="op">/</span>x <span class="op">+</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a></code></pre></div>
-<p><img data-src="/home/wenjie/Dropbox/git/workshop/2018-01-19-siam/docs/index_files/figure-revealjs/vertical-diff-1.png" /><!-- --></p>
+<p><img data-src="index_files/figure-revealjs/vertical-diff-1.png" /><!-- --></p>
 </section>
 <section id="use-the-source-luke" class="slide level2">
 <h2>“Use the source, Luke!”</h2>

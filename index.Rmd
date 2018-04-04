@@ -797,7 +797,8 @@ sessionInfo()
 ```{r performance-tip-1, cache = TRUE}
 vec <- rnorm(50)
 stopifnot(all.equal(1:length(vec), seq_along(vec)))
-microbenchmark(1:length(vec), seq_along(vec), times = 1e3, unit = "relative")
+microbenchmark(1:length(vec), seq_along(vec),
+               times = 1e3, unit = "relative")
 ```
 
 - `1:n` vs. `seq_len(n)`

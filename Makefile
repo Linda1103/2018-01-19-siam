@@ -4,6 +4,8 @@ output_dir := docs
 
 ## corresponding output names
 html_out := $(patsubst %.Rmd,docs/%.html,$(rmd_source))
+tmp_out := $(patsubst %.Rmd,%.html,$(rmd_source))
+tmp_files := $(patsubst %.Rmd,%_files,$(rmd_source))
 
 ## CRAN mirror
 repos := https://cloud.r-project.org
@@ -16,8 +18,10 @@ all: $(html_out)
 $(html_out): $(rmd_source) _output.yaml
 	@$(MAKE) -s check
 	@echo "compiling to html slides..."
-	@Rscript --vanilla -e \
-	"rmarkdown::render('$(rmd_source)', output_dir = '$(output_dir)')"
+	@Rscript --vanilla -e "rmarkdown::render('$(rmd_source)')"
+	@mv $(tmp_out) docs/
+	@rm -rf docs/$(tmp_files)
+	@mv $(tmp_files) docs/
 
 .PHONY: check
 check:
@@ -31,4 +35,4 @@ clean:
 
 .PHONY: rmCache
 rmCache:
-	@rm -rf *_files *_cache
+	@rm -rf *_cache
