@@ -125,13 +125,13 @@ need.packages(
 
 - `help()` or `?` for getting help on a specific topic (usually a function
   name) or package.
-  ```r
+  ```{r help, eval = FALSE}
   ?help                         # details on using the `help` function
   help(package = "stats")       # information about the stats package
   ```
 
 - `help.search()` or `??` for fuzzy (local) search.
-  ```r
+  ```{r help-search, eval = FALSE}
   ??splines                     # search "splines"
   help.search("row mean")       # search "row mean"
   ```
@@ -151,7 +151,7 @@ need.packages(
 - indexing and subsetting by `[]` for vectors
 - `c()` for combining/concatenating vectors
 
-```r
+```{r calculator, eval = FALSE}
 x = (1 + 2) * 3 / 4                   # x = 2.25
 x ^ 2                                 # 5.0625
 x %% 2                                # 0.25
@@ -188,7 +188,7 @@ c(exp(1), pi)                         # (2.718282, 3.141593)
 - Four common types of atomic vectors are logical, integer, double (often called
   numeric), and character.
 
-```r
+```{r vectors, eval = FALSE}
 dbl_var <- c(1, 2.5, 4.5)                 # double
 int_var <- c(1L, 6L, 10L)                 # integer (with `L` suffix)
 log_var <- c(TRUE, FALSE, T, F)           # logical (avoid using `T`, `F`)
@@ -200,7 +200,7 @@ chr_var <- c("these are", "some strings") # character
 - `NULL`: The null object
 
 
-```r
+```{r na, eval = FALSE}
 is.na(c(NA, NaN))                         # (TRUE, TRUE)
 is.nan(c(NA, NaN))                        # (FALSE, TRUE)
 is.null(NA)                               # FALSE
@@ -221,7 +221,7 @@ typeof(), is.character(), as.character(), is.numeric(), as.numeric()
 is.logical(), as.logical(), ...
 ```
 
-```r
+```{r vector-examples, eval = FALSE}
 ## e.g.,
 x <- 1:3                         # (1, 2, 3)
 length(x)                        # 3
@@ -272,7 +272,7 @@ e.g., `rnorm()` for generating random numbers following normal distribution.
 
 ## Matrices and arrays
 
-```r
+```{r matrix-examples, eval = FALSE}
 a <- matrix(LETTERS[1:6], nrow = 2)  # 2 x 3 matrix ("A"-"F" by columns)
 dim(a)                               # (2, 3)
 a[2]                                 # "B"
@@ -299,7 +299,7 @@ eigen(), qr(), svd(), rcond(), solve()
 
 ## Data frames
 
-```{r}
+```{r data-frame-examples}
 dat <- data.frame(x = 1:3, y = c("a", "b", "c"))
 dat$z <- as.character(dat$x + 10)
 dat$fac_z <- factor(dat$z)
@@ -317,7 +317,7 @@ str(dat)
 
 ## Lists
 
-```{r}
+```{r list-examples}
 x <- list(1:3, "a", c(TRUE, FALSE, TRUE), c(2.3, 5.9))
 names(x) <- c("foo", "bar", "alpha", "beta")
 str(x)
@@ -328,7 +328,7 @@ y[[2]](1:10)
 
 ---
 
-```{r}
+```{r nested-list-example}
 z <- list(list(list()))
 str(z)
 ```
@@ -386,7 +386,7 @@ f <- function(a, b) {
 f(2)                    # without any error/warning/message
 ```
 
-```{r eval = FALSE}
+```{r lazy-evaluation-error-example, eval = FALSE}
 f <- function(a, b) {
     return(a + b)
 }
@@ -399,7 +399,7 @@ f(2)                     # error: argument "b" is missing, with no default
   functions
 - can be left unspecified
 
-```r
+```{r dots-argument-myplot, eval = FALSE}
 my_plot <- function(x, y, type = "l", ...) {
     plot(x, y, type = type, ...)
 }
@@ -698,14 +698,14 @@ foo <- function(x) {
 foo(1:3)
 ```
 
-```r
+```{r debugging-test, eval = FALSE}
 foo("a")                                # leads to error
 set.seed(123); foo(rnorm(100))          # leads to warning
 ```
 
 ---
 
-```r
+```{r debugging-browser, eval = FALSE}
 foo <- function(x) {
     x2 <- x * 2
     browser()
@@ -713,7 +713,7 @@ foo <- function(x) {
 }
 ```
 
-```r
+```{r debugging-traceback, eval = FALSE}
 f <- function(x) {
     x - g(x + 1)
 }
@@ -1051,7 +1051,7 @@ fortune(250)
 
 ## The "Hello Shiny!" example
 
-```r
+```{r hello-shiny, eval = FALSE}
 library("shiny")
 ui <- fluidPage(
     titlePanel("Hello Shiny!"),
