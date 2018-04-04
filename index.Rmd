@@ -14,7 +14,10 @@ options(width = 90)
 
 ## Getting Started
 
-- slides available at [wenjie-stat.me/2018-01-19-siam/][slides]
+- these slides are available at [wenjie-stat.me/2018-01-19-siam/][slides-part1]
+
+- the slides of part II are available at
+  [wenjie-stat.me/2018-01-19-siam/][slides-part2]
 
 - source code of the slides and all the examples:
   [https://github.com/wenjie2wang/2018-01-19-siam/][source-repo]
@@ -84,7 +87,7 @@ install.packages("revealjs")
 ## for following examples
 install.packages(
     c("bookdown", "data.table", "dplyr", "fortunes", "ggplot2",
-      "microbenchmark", "plotly", "profvis", "RCpp", "shiny")
+      "microbenchmark", "plotly", "profvis", "Rcpp", "shiny")
 )
 ```
 
@@ -113,7 +116,7 @@ need.packages <- function(pkg, ...)
 }
 need.packages(
     c("bookdown", "data.table", "dplyr", "fortunes", "ggplot2",
-      "microbenchmark", "plotly", "profvis", "RCpp", "shiny")
+      "microbenchmark", "plotly", "profvis", "Rcpp", "shiny")
 )
 ```
 
@@ -1099,7 +1102,8 @@ knitr::include_app("https://wenjie-stat.shinyapps.io/minisplines2/", "500px")
 - https://github.com/wenjie2wang/
 - wenjie.2.wang@uconn.edu
 
-[slides]: https://wenjie-stat.me/2018-01-19-siam/
+[slides-part1]: https://wenjie-stat.me/2018-01-19-siam/
+[slides-part2]: https://wenjie-stat.me/2018-04-06-siam/
 [source-repo]: https://github.com/wenjie2wang/2018-01-19-siam/
 [cran]: https://cran.r-project.org
 [rstudio-ide]: https://www.rstudio.com/products/RStudio/#Desktop
