@@ -526,10 +526,9 @@ Department of Statistics, UConn</div></h2>
 <section id="getting-started" class="slide level2">
 <h2>Getting Started</h2>
 <ul>
-<li><p>these slides are available at <a href="https://wenjie-stat.me/2018-01-19-siam/">wenjie-stat.me/2018-01-19-siam/</a></p></li>
-<li><p>the slides of part II are available at <a href="https://wenjie-stat.me/2018-04-06-siam/">wenjie-stat.me/2018-01-19-siam/</a></p></li>
+<li><p>slides available at <a href="https://wenjie-stat.me/2018-01-19-siam/">wenjie-stat.me/2018-01-19-siam/</a></p></li>
 <li><p>source code of the slides and all the examples: <a href="https://github.com/wenjie2wang/2018-01-19-siam/" class="uri">https://github.com/wenjie2wang/2018-01-19-siam/</a></p></li>
-<li><p>Prerequisites: <a href="https://cran.r-project.org">R</a> and possibly the <a href="https://www.rstudio.com/products/RStudio/#Desktop">RStudio IDE</a> have been installed.</p></li>
+<li><p>prerequisites: <a href="https://cran.r-project.org">R</a> and possibly the <a href="https://www.rstudio.com/products/RStudio/#Desktop">RStudio IDE</a> have been installed.</p></li>
 </ul>
 </section>
 <section id="outline" class="slide level2">
@@ -1269,10 +1268,10 @@ Department of Statistics, UConn</div></h2>
 <a class="sourceLine" id="cb124-7" data-line-number="7">    <span class="dt">times =</span> <span class="dv">200</span>, <span class="dt">unit =</span> <span class="st">&quot;relative&quot;</span></a>
 <a class="sourceLine" id="cb124-8" data-line-number="8">)</a></code></pre></div>
 <pre><code>## Unit: relative
-##      expr        min         lq       mean     median         uq       max neval cld
-##  for loop 461.285699 400.087721 294.443212 261.635344 246.157437 274.96480   200   b
-##     apply   5.697152   5.495626   5.156017   3.974545   4.340044  63.33293   200  a 
-##   rowSums   1.000000   1.000000   1.000000   1.000000   1.000000   1.00000   200  a</code></pre>
+##      expr        min       lq       mean     median        uq       max neval cld
+##  for loop 509.269580 410.2903 255.181686 227.913516 202.92572 68.439475   200   b
+##     apply   6.432437   5.6705   4.206034   3.298338   4.20009  1.240729   200  a 
+##   rowSums   1.000000   1.0000   1.000000   1.000000   1.00000  1.000000   200  a</code></pre>
 <ul>
 <li>R is not a fast language compared with C/C++/Fortran. However, a lot of R code is slow simply because it is poorly written.</li>
 </ul>
@@ -1290,32 +1289,32 @@ Department of Statistics, UConn</div></h2>
 ## LAPACK: /usr/lib/liblapack.so.3.8.0
 ## 
 ## locale:
-##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C               LC_TIME=en_US.UTF-8       
-##  [4] LC_COLLATE=en_US.UTF-8     LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
-##  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                  LC_ADDRESS=C              
-## [10] LC_TELEPHONE=C             LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+##  [1] LC_CTYPE=en_US.utf8       LC_NUMERIC=C              LC_TIME=en_US.utf8       
+##  [4] LC_COLLATE=en_US.utf8     LC_MONETARY=en_US.utf8    LC_MESSAGES=en_US.utf8   
+##  [7] LC_PAPER=en_US.utf8       LC_NAME=C                 LC_ADDRESS=C             
+## [10] LC_TELEPHONE=C            LC_MEASUREMENT=en_US.utf8 LC_IDENTIFICATION=C      
 ## 
 ## attached base packages:
 ## [1] methods   stats     graphics  grDevices utils     datasets  base     
 ## 
 ## other attached packages:
-##  [1] plyr_1.8.4           shiny_1.0.5          Rcpp_0.12.16         profvis_0.3.5       
+##  [1] plyr_1.8.4           shiny_1.0.5          Rcpp_0.12.15         profvis_0.3.5       
 ##  [5] plotly_4.7.1         microbenchmark_1.4-4 ggplot2_2.2.1        fortunes_1.5-4      
 ##  [9] dplyr_0.7.4          data.table_1.10.4-3  bookdown_0.7        
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] revealjs_0.9      zoo_1.8-1         xfun_0.1          purrr_0.2.4      
 ##  [5] splines_3.4.4     lattice_0.20-35   colorspace_1.3-2  htmltools_0.3.6  
-##  [9] viridisLite_0.3.0 yaml_2.1.18       survival_2.41-3   rlang_0.2.0      
-## [13] pillar_1.2.1      glue_1.2.0        bindrcpp_0.2      multcomp_1.4-8   
-## [17] bindr_0.1.1       stringr_1.3.0     munsell_0.4.3     gtable_0.2.0     
+##  [9] viridisLite_0.3.0 yaml_2.1.16       survival_2.41-3   rlang_0.2.0      
+## [13] pillar_1.1.0      glue_1.2.0        bindrcpp_0.2      multcomp_1.4-8   
+## [17] bindr_0.1         stringr_1.3.0     munsell_0.4.3     gtable_0.2.0     
 ## [21] htmlwidgets_1.0   mvtnorm_1.0-7     codetools_0.2-15  evaluate_0.10.1  
-## [25] knitr_1.20        httpuv_1.3.6.2    TH.data_1.0-8     xtable_1.8-2     
+## [25] knitr_1.20        httpuv_1.3.5      TH.data_1.0-8     xtable_1.8-2     
 ## [29] scales_0.5.0      backports_1.1.2   jsonlite_1.5      mime_0.5         
-## [33] digest_0.6.15     stringi_1.1.7     grid_3.4.4        rprojroot_1.3-2  
+## [33] digest_0.6.15     stringi_1.1.6     grid_3.4.4        rprojroot_1.3-2  
 ## [37] tools_3.4.4       sandwich_2.4-0    magrittr_1.5      lazyeval_0.2.1   
 ## [41] tibble_1.4.2      tidyr_0.8.0       pkgconfig_2.0.1   MASS_7.3-49      
-## [45] Matrix_1.2-12     assertthat_0.2.0  rmarkdown_1.9     httr_1.3.1       
+## [45] Matrix_1.2-12     assertthat_0.2.0  rmarkdown_1.8     httr_1.3.1       
 ## [49] R6_2.2.2          compiler_3.4.4</code></pre>
 </section>
 <section class="slide level2">
@@ -1643,9 +1642,10 @@ Department of Statistics, UConn</div></h2>
 <li>source available at <a href="https://github.com/wenjie2wang/wenjie-stat.shinyapps/blob/master/miniSplines2/app.R">here</a></li>
 </ul>
 </section>
-<section id="some-reference-for-further-reading" class="slide level2">
-<h2>Some reference for further reading</h2>
+<section id="some-reference-and-further-reading" class="slide level2">
+<h2>Some reference and further reading</h2>
 <ul>
+<li>slides for part II: <a href="https://wenjie-stat.me/2018-04-06-siam/">wenjie-stat.me/2018-04-06-siam/</a></li>
 <li><a href="https://bookdown.org/rdpeng/rprogdatascience/"><em>R Programming for Data Science</em></a> by Roger D. Peng</li>
 <li><a href="http://r4ds.had.co.nz/"><em>R for Data Science</em></a> by Garrett Grolemund, and Hadley Wickham</li>
 <li><a href="http://adv-r.had.co.nz"><em>Advanced R</em></a> by Hadley Wickham</li>

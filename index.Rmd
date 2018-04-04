@@ -14,15 +14,12 @@ options(width = 90)
 
 ## Getting Started
 
-- these slides are available at [wenjie-stat.me/2018-01-19-siam/][slides-part1]
-
-- the slides of part II are available at
-  [wenjie-stat.me/2018-01-19-siam/][slides-part2]
+- slides available at [wenjie-stat.me/2018-01-19-siam/][slides-part1]
 
 - source code of the slides and all the examples:
   [https://github.com/wenjie2wang/2018-01-19-siam/][source-repo]
 
-- Prerequisites: [R][cran] and possibly the [RStudio IDE][rstudio-ide] have
+- prerequisites: [R][cran] and possibly the [RStudio IDE][rstudio-ide] have
   been installed.
 
 
@@ -1081,8 +1078,9 @@ knitr::include_app("https://wenjie-stat.shinyapps.io/minisplines2/", "500px")
 - source available at [here][source-mini-splines2]
 
 
-## Some reference for further reading
+## Some reference and further reading
 
+- slides for part II: [wenjie-stat.me/2018-04-06-siam/][slides-part2]
 - [*R Programming for Data
   Science*](https://bookdown.org/rdpeng/rprogdatascience/) by Roger D. Peng
 - [*R for Data Science*](http://r4ds.had.co.nz/) by Garrett Grolemund, and
@@ -1102,6 +1100,7 @@ knitr::include_app("https://wenjie-stat.shinyapps.io/minisplines2/", "500px")
 - https://wenjie-stat.me
 - https://github.com/wenjie2wang/
 - wenjie.2.wang@uconn.edu
+
 
 [slides-part1]: https://wenjie-stat.me/2018-01-19-siam/
 [slides-part2]: https://wenjie-stat.me/2018-04-06-siam/
