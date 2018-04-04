@@ -1,7 +1,7 @@
 # About
 
-This reposoitory contains slides and source code for the statistical
-software workshop on **R** programming.
+This reposoitory contains slides and example source code for the statistical
+software workshop on **R** programming (Part I).
 
 The workshop is organized by the UConn SIAM Graduate Chapter, Statistics
 Department, Mathematics Department, and Computer Science Department.
