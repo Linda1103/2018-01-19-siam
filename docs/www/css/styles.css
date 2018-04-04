@@ -27,7 +27,7 @@ p {
     font-size: 1.2em;
 }
 
-h1.title, h2.author, h3.date {
+h1.title, h1.subtitle, h2.author, h3.date {
     text-align: center;
 }
 h2.author {
