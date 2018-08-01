@@ -2,20 +2,20 @@
 
 // [[Rcpp::export]]
 Rcpp::NumericVector aggregateSum(Rcpp::NumericVector x,
-                                 Rcpp::NumericVector indices,
+                                 Rcpp::IntegerVector indices,
                                  bool simplify = true,
                                  bool addNames = true)
 {
   // naive function to sum x based on indices
-  const long int n_x = x.size();
+  const int n_x = x.size();
 
-  Rcpp::NumericVector uniInd = Rcpp::sort_unique(indices);
-  const long int n_uniInd = uniInd.size();
+  Rcpp::IntegerVector uniInd = Rcpp::sort_unique(indices);
+  const int n_uniInd = uniInd.size();
 
   // the x's having a same index are summed
   Rcpp::NumericVector sumVec(n_uniInd);
-  for (size_t i = 0; i < n_uniInd; ++i) {
-      for (size_t j = 0; j < n_x; ++j) {
+  for (int i = 0; i < n_uniInd; ++i) {
+      for (int j = 0; j < n_x; ++j) {
         if (uniInd[i] == indices[j]) {
           sumVec[i] += x[j];
         }
@@ -32,8 +32,8 @@ Rcpp::NumericVector aggregateSum(Rcpp::NumericVector x,
 
   // else
   Rcpp::NumericVector out(n_x);
-  for (size_t i = 0; i < n_x; ++i) {
-    for (size_t j = 0; j < n_uniInd; ++j) {
+  for (int i = 0; i < n_x; ++i) {
+    for (int j = 0; j < n_uniInd; ++j) {
       if (indices[i] == uniInd[j]) {
         out[i] = sumVec[j];
         break;
