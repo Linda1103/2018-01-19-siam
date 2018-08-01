@@ -14,7 +14,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -27,13 +27,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -586,9 +584,9 @@ Department of Statistics, UConn</div></h2>
 </ul></li>
 <li>A list of R packages needed is given below.</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">## for reproducing the slides</a>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co">## for reproducing the slides</span></a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">install.packages</span>(<span class="st">&quot;revealjs&quot;</span>)</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">## for following examples</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="co">## for following examples</span></a>
 <a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw">install.packages</span>(</a>
 <a class="sourceLine" id="cb1-5" data-line-number="5">    <span class="kw">c</span>(<span class="st">&quot;bookdown&quot;</span>, <span class="st">&quot;data.table&quot;</span>, <span class="st">&quot;dplyr&quot;</span>, <span class="st">&quot;fortunes&quot;</span>, <span class="st">&quot;ggplot2&quot;</span>,</a>
 <a class="sourceLine" id="cb1-6" data-line-number="6">      <span class="st">&quot;microbenchmark&quot;</span>, <span class="st">&quot;plotly&quot;</span>, <span class="st">&quot;profvis&quot;</span>, <span class="st">&quot;Rcpp&quot;</span>, <span class="st">&quot;shiny&quot;</span>)</a>
@@ -693,7 +691,7 @@ Department of Statistics, UConn</div></h2>
 <a class="sourceLine" id="cb7-4" data-line-number="4"><span class="op">%in%</span>, <span class="kw">match</span>(), <span class="kw">rev</span>(), <span class="kw">head</span>(), <span class="kw">tail</span>(), <span class="kw">paste</span>(), <span class="kw">paste0</span>()</a>
 <a class="sourceLine" id="cb7-5" data-line-number="5"><span class="kw">typeof</span>(), <span class="kw">is.character</span>(), <span class="kw">as.character</span>(), <span class="kw">is.numeric</span>(), <span class="kw">as.numeric</span>()</a>
 <a class="sourceLine" id="cb7-6" data-line-number="6"><span class="kw">is.logical</span>(), <span class="kw">as.logical</span>(), ...</a></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">## e.g.,</a>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co">## e.g.,</span></a>
 <a class="sourceLine" id="cb8-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span>                         <span class="co"># (1, 2, 3)</span></a>
 <a class="sourceLine" id="cb8-3" data-line-number="3"><span class="kw">length</span>(x)                        <span class="co"># 3</span></a>
 <a class="sourceLine" id="cb8-4" data-line-number="4"><span class="kw">names</span>(x) &lt;-<span class="st"> </span>letters[x]           <span class="co"># add names to x: &quot;a&quot;, &quot;b&quot;, and &quot;c&quot;</span></a>
@@ -710,7 +708,7 @@ Department of Statistics, UConn</div></h2>
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">## Basic math functions</a>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co">## Basic math functions</span></a>
 <a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw">abs</span>(), <span class="kw">sign</span>()</a>
 <a class="sourceLine" id="cb9-3" data-line-number="3"><span class="kw">sin</span>(), <span class="kw">cos</span>(), <span class="kw">tan</span>()</a>
 <a class="sourceLine" id="cb9-4" data-line-number="4"><span class="kw">acos</span>(), <span class="kw">asin</span>(), <span class="kw">atan</span>(), <span class="kw">atan2</span>()</a>
@@ -721,11 +719,11 @@ Department of Statistics, UConn</div></h2>
 <a class="sourceLine" id="cb9-9" data-line-number="9"><span class="kw">sum</span>(), <span class="kw">prod</span>(), <span class="kw">max</span>(), <span class="kw">min</span>(), <span class="kw">pmax</span>(), <span class="kw">pmin</span>()</a>
 <a class="sourceLine" id="cb9-10" data-line-number="10"><span class="kw">cummax</span>(), <span class="kw">cummin</span>(), <span class="kw">cumprod</span>(), <span class="kw">cumsum</span>(), <span class="kw">diff</span>()</a>
 <a class="sourceLine" id="cb9-11" data-line-number="11"><span class="kw">mean</span>(), <span class="kw">median</span>(), <span class="kw">cor</span>(), <span class="kw">sd</span>(), <span class="kw">var</span>(), <span class="kw">range</span>()</a></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">## Ordering and tabulating</a>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co">## Ordering and tabulating</span></a>
 <a class="sourceLine" id="cb10-2" data-line-number="2"><span class="kw">duplicated</span>(), <span class="kw">unique</span>()</a>
 <a class="sourceLine" id="cb10-3" data-line-number="3"><span class="kw">sort</span>(), <span class="kw">order</span>(), <span class="kw">rank</span>(), <span class="kw">quantile</span>()</a>
 <a class="sourceLine" id="cb10-4" data-line-number="4"><span class="kw">rle</span>(), <span class="kw">table</span>(), <span class="kw">xtabs</span>(), <span class="kw">split</span>(), <span class="kw">cut</span>()</a></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">## Random variables</a>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="co">## Random variables</span></a>
 <a class="sourceLine" id="cb11-2" data-line-number="2">(d, p, q, r) <span class="op">+</span><span class="st"> </span>(beta, binom, cauchy, chisq, exp, f, gamma, geom,</a>
 <a class="sourceLine" id="cb11-3" data-line-number="3">    hyper, lnorm, logis, multinom, nbinom, norm, pois, signrank, t,</a>
 <a class="sourceLine" id="cb11-4" data-line-number="4">    unif, weibull, wilcox, birthday, tukey)</a></code></pre></div>
@@ -818,13 +816,13 @@ Department of Statistics, UConn</div></h2>
 <h2>Functions</h2>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">function_name &lt;-<span class="st"> </span><span class="cf">function</span>(arguments) {</a>
 <a class="sourceLine" id="cb25-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb25-3" data-line-number="3">    ## do something interesting here</a>
+<a class="sourceLine" id="cb25-3" data-line-number="3">    <span class="co">## do something interesting here</span></a>
 <a class="sourceLine" id="cb25-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb25-5" data-line-number="5">    ## the last expression evaluated will be returned</a>
-<a class="sourceLine" id="cb25-6" data-line-number="6">    ## or explictly use return()</a>
+<a class="sourceLine" id="cb25-5" data-line-number="5">    <span class="co">## the last expression evaluated will be returned</span></a>
+<a class="sourceLine" id="cb25-6" data-line-number="6">    <span class="co">## or explictly use return()</span></a>
 <a class="sourceLine" id="cb25-7" data-line-number="7"></a>
 <a class="sourceLine" id="cb25-8" data-line-number="8">}</a></code></pre></div>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">## e.g.,</a>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="co">## e.g.,</span></a>
 <a class="sourceLine" id="cb26-2" data-line-number="2">foo &lt;-<span class="st"> </span><span class="cf">function</span>(x) x <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
 <a class="sourceLine" id="cb26-3" data-line-number="3">bar &lt;-<span class="st"> </span><span class="cf">function</span>(x, <span class="dt">y =</span> <span class="st">&quot;alpha&quot;</span>) {</a>
 <a class="sourceLine" id="cb26-4" data-line-number="4">    x &lt;-<span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
@@ -859,7 +857,7 @@ Department of Statistics, UConn</div></h2>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">my_plot &lt;-<span class="st"> </span><span class="cf">function</span>(x, y, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, ...) {</a>
 <a class="sourceLine" id="cb32-2" data-line-number="2">    <span class="kw">plot</span>(x, y, <span class="dt">type =</span> type, ...)</a>
 <a class="sourceLine" id="cb32-3" data-line-number="3">}</a>
-<a class="sourceLine" id="cb32-4" data-line-number="4">## the first function call leads to the second one</a>
+<a class="sourceLine" id="cb32-4" data-line-number="4"><span class="co">## the first function call leads to the second one</span></a>
 <a class="sourceLine" id="cb32-5" data-line-number="5"><span class="kw">my_plot</span>(x, y, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb32-6" data-line-number="6"><span class="kw">plot</span>(x, y, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</a></code></pre></div>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1">f &lt;-<span class="st"> </span><span class="cf">function</span>(x, ...) <span class="kw">list</span>(...)</a>
@@ -932,12 +930,12 @@ Department of Statistics, UConn</div></h2>
 <div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1"><span class="kw">get</span>(<span class="st">&quot;pow&quot;</span>, <span class="kw">environment</span>(cube))</a></code></pre></div>
 <pre><code>## [1] 3</code></pre>
 <div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1"><span class="kw">search</span>()</a></code></pre></div>
-<pre><code>##  [1] &quot;.GlobalEnv&quot;             &quot;package:shiny&quot;          &quot;package:methods&quot;       
-##  [4] &quot;package:Rcpp&quot;           &quot;package:profvis&quot;        &quot;package:plotly&quot;        
-##  [7] &quot;package:microbenchmark&quot; &quot;package:ggplot2&quot;        &quot;package:fortunes&quot;      
-## [10] &quot;package:dplyr&quot;          &quot;package:data.table&quot;     &quot;package:bookdown&quot;      
-## [13] &quot;package:stats&quot;          &quot;package:graphics&quot;       &quot;package:grDevices&quot;     
-## [16] &quot;package:utils&quot;          &quot;package:datasets&quot;       &quot;Autoloads&quot;             
+<pre><code>##  [1] &quot;.GlobalEnv&quot;             &quot;package:shiny&quot;          &quot;package:Rcpp&quot;          
+##  [4] &quot;package:profvis&quot;        &quot;package:plotly&quot;         &quot;package:microbenchmark&quot;
+##  [7] &quot;package:ggplot2&quot;        &quot;package:fortunes&quot;       &quot;package:dplyr&quot;         
+## [10] &quot;package:data.table&quot;     &quot;package:bookdown&quot;       &quot;package:stats&quot;         
+## [13] &quot;package:graphics&quot;       &quot;package:grDevices&quot;      &quot;package:utils&quot;         
+## [16] &quot;package:datasets&quot;       &quot;package:methods&quot;        &quot;Autoloads&quot;             
 ## [19] &quot;package:base&quot;</code></pre>
 </section>
 <section class="slide level2">
@@ -961,24 +959,24 @@ Department of Statistics, UConn</div></h2>
 </section>
 <section id="control-structures" class="slide level2">
 <h2>Control structures</h2>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1">## a simple example of the if-else statement</a>
-<a class="sourceLine" id="cb60-2" data-line-number="2">## for some vector variable `x`</a>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="co">## a simple example of the if-else statement</span></a>
+<a class="sourceLine" id="cb60-2" data-line-number="2"><span class="co">## for some vector variable `x`</span></a>
 <a class="sourceLine" id="cb60-3" data-line-number="3"><span class="cf">if</span> (<span class="kw">length</span>(x) <span class="op">&gt;</span><span class="st"> </span><span class="dv">10</span>) {</a>
-<a class="sourceLine" id="cb60-4" data-line-number="4">    ## do something here if length of x &gt; 10</a>
+<a class="sourceLine" id="cb60-4" data-line-number="4">    <span class="co">## do something here if length of x &gt; 10</span></a>
 <a class="sourceLine" id="cb60-5" data-line-number="5">} <span class="cf">else</span> <span class="cf">if</span> (<span class="kw">length</span>(x) <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span>) {</a>
-<a class="sourceLine" id="cb60-6" data-line-number="6">    ## do something else if length of x &gt; 5 but &lt;= 10</a>
+<a class="sourceLine" id="cb60-6" data-line-number="6">    <span class="co">## do something else if length of x &gt; 5 but &lt;= 10</span></a>
 <a class="sourceLine" id="cb60-7" data-line-number="7">} <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb60-8" data-line-number="8">    ## do something else</a>
+<a class="sourceLine" id="cb60-8" data-line-number="8">    <span class="co">## do something else</span></a>
 <a class="sourceLine" id="cb60-9" data-line-number="9">}</a></code></pre></div>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1">## a simple loop that seems to be okay</a>
-<a class="sourceLine" id="cb61-2" data-line-number="2">## however, it is a not necessary loop in R!</a>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1"><span class="co">## a simple loop that seems to be okay</span></a>
+<a class="sourceLine" id="cb61-2" data-line-number="2"><span class="co">## however, it is a not necessary loop in R!</span></a>
 <a class="sourceLine" id="cb61-3" data-line-number="3">x &lt;-<span class="st"> </span><span class="dv">0</span>; y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">9</span>)</a>
 <a class="sourceLine" id="cb61-4" data-line-number="4"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>) {</a>
 <a class="sourceLine" id="cb61-5" data-line-number="5">    x &lt;-<span class="st"> </span>x <span class="op">+</span><span class="st"> </span>y[i]</a>
 <a class="sourceLine" id="cb61-6" data-line-number="6">}</a>
 <a class="sourceLine" id="cb61-7" data-line-number="7">x <span class="op">==</span><span class="st"> </span><span class="kw">sum</span>(y)</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1">## see also</a>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1"><span class="co">## see also</span></a>
 <a class="sourceLine" id="cb63-2" data-line-number="2"><span class="cf">switch</span>(), <span class="kw">ifelse</span>(), <span class="cf">while</span>(), <span class="cf">break</span>, <span class="cf">next</span>, <span class="cf">repeat</span>(), <span class="kw">return</span>()</a></code></pre></div>
 </section>
 <section id="loop-helper-functions" class="slide level2">
@@ -1268,10 +1266,10 @@ Department of Statistics, UConn</div></h2>
 <a class="sourceLine" id="cb124-7" data-line-number="7">    <span class="dt">times =</span> <span class="dv">200</span>, <span class="dt">unit =</span> <span class="st">&quot;relative&quot;</span></a>
 <a class="sourceLine" id="cb124-8" data-line-number="8">)</a></code></pre></div>
 <pre><code>## Unit: relative
-##      expr        min       lq       mean     median        uq       max neval cld
-##  for loop 509.269580 410.2903 255.181686 227.913516 202.92572 68.439475   200   b
-##     apply   6.432437   5.6705   4.206034   3.298338   4.20009  1.240729   200  a 
-##   rowSums   1.000000   1.0000   1.000000   1.000000   1.00000  1.000000   200  a</code></pre>
+##      expr        min         lq       mean     median         uq       max neval cld
+##  for loop 557.497754 405.001274 332.020959 302.998435 278.875915 296.68764   200   b
+##     apply   7.568284   6.057741   5.280688   4.881616   4.894252   4.14813   200  a 
+##   rowSums   1.000000   1.000000   1.000000   1.000000   1.000000   1.00000   200  a</code></pre>
 <ul>
 <li>R is not a fast language compared with C/C++/Fortran. However, a lot of R code is slow simply because it is poorly written.</li>
 </ul>
@@ -1280,42 +1278,43 @@ Department of Statistics, UConn</div></h2>
 <h2>A few quick benchmarkings</h2>
 <p>The R session information for benchmarking is given below.</p>
 <div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb126-1" data-line-number="1"><span class="kw">sessionInfo</span>()</a></code></pre></div>
-<pre><code>## R version 3.4.4 (2018-03-15)
+<pre><code>## R version 3.5.1 (2018-07-02)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
 ## Running under: Arch Linux
 ## 
 ## Matrix products: default
-## BLAS: /usr/lib/libblas.so.3.8.0
+## BLAS: /usr/lib/libopenblasp-r0.3.0.dev.so
 ## LAPACK: /usr/lib/liblapack.so.3.8.0
 ## 
 ## locale:
-##  [1] LC_CTYPE=en_US.utf8       LC_NUMERIC=C              LC_TIME=en_US.utf8       
-##  [4] LC_COLLATE=en_US.utf8     LC_MONETARY=en_US.utf8    LC_MESSAGES=en_US.utf8   
-##  [7] LC_PAPER=en_US.utf8       LC_NAME=C                 LC_ADDRESS=C             
-## [10] LC_TELEPHONE=C            LC_MEASUREMENT=en_US.utf8 LC_IDENTIFICATION=C      
+##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C               LC_TIME=en_US.UTF-8       
+##  [4] LC_COLLATE=en_US.UTF-8     LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+##  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                  LC_ADDRESS=C              
+## [10] LC_TELEPHONE=C             LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 ## 
 ## attached base packages:
-## [1] methods   stats     graphics  grDevices utils     datasets  base     
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] plyr_1.8.4           shiny_1.0.5          Rcpp_0.12.15         profvis_0.3.5       
-##  [5] plotly_4.7.1         microbenchmark_1.4-4 ggplot2_2.2.1        fortunes_1.5-4      
-##  [9] dplyr_0.7.4          data.table_1.10.4-3  bookdown_0.7        
+##  [1] plyr_1.8.4           shiny_1.1.0          Rcpp_0.12.18         profvis_0.3.5       
+##  [5] plotly_4.8.0         microbenchmark_1.4-4 ggplot2_3.0.0        fortunes_1.5-4      
+##  [9] dplyr_0.7.6          data.table_1.11.4    bookdown_0.7        
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] revealjs_0.9      zoo_1.8-1         xfun_0.1          purrr_0.2.4      
-##  [5] splines_3.4.4     lattice_0.20-35   colorspace_1.3-2  htmltools_0.3.6  
-##  [9] viridisLite_0.3.0 yaml_2.1.16       survival_2.41-3   rlang_0.2.0      
-## [13] pillar_1.1.0      glue_1.2.0        bindrcpp_0.2      multcomp_1.4-8   
-## [17] bindr_0.1         stringr_1.3.0     munsell_0.4.3     gtable_0.2.0     
-## [21] htmlwidgets_1.0   mvtnorm_1.0-7     codetools_0.2-15  evaluate_0.10.1  
-## [25] knitr_1.20        httpuv_1.3.5      TH.data_1.0-8     xtable_1.8-2     
-## [29] scales_0.5.0      backports_1.1.2   jsonlite_1.5      mime_0.5         
-## [33] digest_0.6.15     stringi_1.1.6     grid_3.4.4        rprojroot_1.3-2  
-## [37] tools_3.4.4       sandwich_2.4-0    magrittr_1.5      lazyeval_0.2.1   
-## [41] tibble_1.4.2      tidyr_0.8.0       pkgconfig_2.0.1   MASS_7.3-49      
-## [45] Matrix_1.2-12     assertthat_0.2.0  rmarkdown_1.8     httr_1.3.1       
-## [49] R6_2.2.2          compiler_3.4.4</code></pre>
+##  [1] revealjs_0.9      zoo_1.8-3         tidyselect_0.2.4  xfun_0.3         
+##  [5] purrr_0.2.5       splines_3.5.1     lattice_0.20-35   colorspace_1.3-2 
+##  [9] htmltools_0.3.6   viridisLite_0.3.0 yaml_2.2.0        survival_2.42-6  
+## [13] rlang_0.2.1       pillar_1.3.0      later_0.7.3       glue_1.3.0       
+## [17] withr_2.1.2       bindrcpp_0.2.2    multcomp_1.4-8    bindr_0.1.1      
+## [21] stringr_1.3.1     munsell_0.5.0     gtable_0.2.0      htmlwidgets_1.2  
+## [25] mvtnorm_1.0-8     codetools_0.2-15  evaluate_0.11     knitr_1.20       
+## [29] httpuv_1.4.5      TH.data_1.0-9     xtable_1.8-2      scales_0.5.0     
+## [33] backports_1.1.2   promises_1.0.1    jsonlite_1.5      mime_0.5         
+## [37] digest_0.6.15     stringi_1.2.4     grid_3.5.1        rprojroot_1.3-2  
+## [41] tools_3.5.1       sandwich_2.4-0    magrittr_1.5      lazyeval_0.2.1   
+## [45] tibble_1.4.2      crayon_1.3.4      tidyr_0.8.1       pkgconfig_2.0.1  
+## [49] MASS_7.3-50       Matrix_1.2-14     assertthat_0.2.0  rmarkdown_1.10   
+## [53] httr_1.3.1        R6_2.2.2          compiler_3.5.1</code></pre>
 </section>
 <section class="slide level2">
 
@@ -1434,7 +1433,7 @@ Department of Statistics, UConn</div></h2>
 <li>How to find the bottleneck of the code (the slowest part of your code)?</li>
 <li>related packages: <strong>utils</strong>, <strong>profvis</strong>, <strong>profmem</strong>, …</li>
 </ul>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb146-1" data-line-number="1">## example of `profvis`</a>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb146-1" data-line-number="1"><span class="co">## example of `profvis`</span></a>
 <a class="sourceLine" id="cb146-2" data-line-number="2"><span class="cf">if</span> (<span class="kw">interactive</span>()) {</a>
 <a class="sourceLine" id="cb146-3" data-line-number="3">    <span class="kw">profvis</span>({</a>
 <a class="sourceLine" id="cb146-4" data-line-number="4">        dat &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="fl">5e4</span>),</a>
@@ -1513,7 +1512,7 @@ Department of Statistics, UConn</div></h2>
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb149-1" data-line-number="1">## a simple example of using base plotting system</a>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb149-1" data-line-number="1"><span class="co">## a simple example of using base plotting system</span></a>
 <a class="sourceLine" id="cb149-2" data-line-number="2"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="dt">mgp =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="fl">0.1</span>))</a>
 <a class="sourceLine" id="cb149-3" data-line-number="3">x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">22</span>; <span class="kw">plot</span>(x, <span class="dt">pch =</span> x, <span class="dt">col =</span> x, <span class="dt">cex =</span> <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb149-4" data-line-number="4"><span class="kw">abline</span>(<span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, <span class="dt">lty =</span> <span class="dv">3</span>, <span class="dt">col =</span> <span class="st">&quot;#64C7C9&quot;</span>)</a>
@@ -1523,7 +1522,7 @@ Department of Statistics, UConn</div></h2>
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb150-1" data-line-number="1">## example boxplots of using ggplot2</a>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb150-1" data-line-number="1"><span class="co">## example boxplots of using ggplot2</span></a>
 <a class="sourceLine" id="cb150-2" data-line-number="2"><span class="kw">library</span>(ggplot2)</a>
 <a class="sourceLine" id="cb150-3" data-line-number="3">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(class, hwy))</a>
 <a class="sourceLine" id="cb150-4" data-line-number="4">(p1 &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> drv)))</a></code></pre></div>
@@ -1531,7 +1530,7 @@ Department of Statistics, UConn</div></h2>
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb151-1" data-line-number="1">## flip the coordinate and use the classic dark-on-light theme</a>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb151-1" data-line-number="1"><span class="co">## flip the coordinate and use the classic dark-on-light theme</span></a>
 <a class="sourceLine" id="cb151-2" data-line-number="2">p1 <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</a></code></pre></div>
 <p><img data-src="index_files/figure-revealjs/ggplot2-example-2-1.png" /><!-- --></p>
 </section>
